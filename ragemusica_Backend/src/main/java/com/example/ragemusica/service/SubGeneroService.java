@@ -1,10 +1,11 @@
 package com.example.ragemusica.service;
 
-import com.example.ragemusica.model.SubGenero;
-import com.example.ragemusica.repository.SubGeneroRepository;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.ragemusica.model.SubGenero;
+import com.example.ragemusica.repository.SubGeneroRepository;
 
 @Service
 public class SubGeneroService {
@@ -21,5 +22,9 @@ public class SubGeneroService {
 
     public SubGenero guardar(SubGenero subGenero) {
         return repo.save(subGenero);
+    }
+
+    public void deleteById(Integer id) {
+        repo.deleteById(id);
     }
 }

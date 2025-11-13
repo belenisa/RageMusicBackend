@@ -1,10 +1,11 @@
 package com.example.ragemusica.service;
 
-import com.example.ragemusica.model.TipoProducto;
-import com.example.ragemusica.repository.TipoProductoRepository;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.ragemusica.model.TipoProducto;
+import com.example.ragemusica.repository.TipoProductoRepository;
 
 @Service
 public class TipoProductoService {
@@ -21,5 +22,9 @@ public class TipoProductoService {
 
     public TipoProducto guardar(TipoProducto tipo) {
         return repo.save(tipo);
+    }
+
+    public void deleteById(Integer id) {
+        repo.deleteById(id);
     }
 }
