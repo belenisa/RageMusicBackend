@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jakarta.transaction.Transactional;
 
 import com.example.ragemusica.model.RolUsuarios;
 import com.example.ragemusica.repository.RolUsuarioRepositorio;
 
+import jakarta.transaction.Transactional;
+
+
 @Service
+@SuppressWarnings("null")
 @Transactional
 public class RolUsuarioService {
      @Autowired
