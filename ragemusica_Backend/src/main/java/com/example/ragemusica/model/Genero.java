@@ -20,11 +20,11 @@ public class Genero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, unique = true)
     private String nombre;
 
-    @OneToMany(mappedBy = "genero")
+    @OneToMany(mappedBy = "subGenero")
     private List<SubGenero> subGeneros;
 }

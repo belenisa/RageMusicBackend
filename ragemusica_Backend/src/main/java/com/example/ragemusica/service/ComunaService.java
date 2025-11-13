@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import com.example.ragemusica.model.Comuna;
 import com.example.ragemusica.repository.ComunaRepositorio;
 
+import lombok.NonNull;
+
+
+@SuppressWarnings("null")
+@NonNull
 @Service
 public class ComunaService {
 

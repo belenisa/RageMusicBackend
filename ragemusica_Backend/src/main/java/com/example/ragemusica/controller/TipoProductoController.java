@@ -2,6 +2,7 @@ package com.example.ragemusica.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,20 +21,34 @@ import com.example.ragemusica.service.TipoProductoService;
 @CrossOrigin(origins = "*")
 public class TipoProductoController {
 
+    @Autowired
     private final TipoProductoService service;
 
     public TipoProductoController(TipoProductoService service) {
         this.service = service;
     }
-
     @GetMapping
-    public List<TipoProducto> listar() {
-        return service.listar();
+    public ResponseEntity<List<TipoProducto>> getallTipoProducto() {
+        List<TipoProducto> tipoProductos = service.findAll();
+        if (tipoProductos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(tipoProductos);
     }
+
 
     @PostMapping
     public TipoProducto crear(@RequestBody TipoProducto tipo) {
         return service.guardar(tipo);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TipoProducto> getTipoProductoById(@PathVariable Integer id) {
+        TipoProducto tipoProducto = service.findById(id);
+        if (tipoProducto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tipoProducto);
     }
 
     @DeleteMapping("/{id}")

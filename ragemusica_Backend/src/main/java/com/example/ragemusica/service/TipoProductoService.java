@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.ragemusica.model.TipoProducto;
 import com.example.ragemusica.repository.TipoProductoRepository;
 
+
+@SuppressWarnings("null")
 @Service
 public class TipoProductoService {
 
@@ -18,9 +20,16 @@ public class TipoProductoService {
         this.repo = repo;
     }
 
-    public List<TipoProducto> listar() {
-        return repo.findAll();
+    public List<TipoProducto> findAll() {
+        List<TipoProducto> tipoProductos = repo.findAll();
+        return tipoProductos;
     }
+
+    public TipoProducto findById(Integer id) {
+        TipoProducto tipoProducto = repo.findById(id).orElse(null);
+        return tipoProducto;
+    }
+
 
     public TipoProducto guardar(TipoProducto tipo) {
         return repo.save(tipo);

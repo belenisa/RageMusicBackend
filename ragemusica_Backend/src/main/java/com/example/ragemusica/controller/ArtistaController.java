@@ -2,6 +2,8 @@ package com.example.ragemusica.controller;
 
 import com.example.ragemusica.model.Artista;
 import com.example.ragemusica.service.ArtistaService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ArtistaController {
 
+    @Autowired
     private final ArtistaService service;
 
     public ArtistaController(ArtistaService service) {

@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import com.example.ragemusica.model.Producto;
 import com.example.ragemusica.repository.ProductoRepository;
 
+
 import jakarta.transaction.Transactional;
 
+
+@SuppressWarnings("null")
 @Transactional
 @Service
 public class ProductoService {
@@ -24,6 +27,7 @@ public class ProductoService {
     public List<Producto> listar() {
         return repo.findAll();
     }
+
 
     public Producto guardar(Producto producto) {
         return repo.save(producto);
@@ -55,6 +59,7 @@ public class ProductoService {
         }
         return null;
     }
+
 
     public void deleteById(Integer id) {
         repo.deleteById(id);

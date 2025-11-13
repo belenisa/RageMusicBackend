@@ -3,11 +3,15 @@ package com.example.ragemusica.service;
 import com.example.ragemusica.model.Genero;
 import com.example.ragemusica.repository.GeneroRepository;
 
+import lombok.NonNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@SuppressWarnings("null")
+@NonNull
 @Service
 public class GeneroService {
 
@@ -25,4 +29,9 @@ public class GeneroService {
     public Genero guardar(Genero genero) {
         return repo.save(genero);
     }
+
+    public void deleteById(Integer id) {
+        repo.deleteById(id);
+    }
+
 }

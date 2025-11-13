@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.ragemusica.model.Artistas;
 import com.example.ragemusica.repository.ArtistasRepositorio;
 
+@SuppressWarnings("null")
 @Service
 public class ArtistasService {
 

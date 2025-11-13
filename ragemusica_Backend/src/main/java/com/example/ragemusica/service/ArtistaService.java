@@ -10,6 +10,7 @@ import java.util.List;
 
 
 
+@SuppressWarnings("null")
 @Service
 public class ArtistaService {
 

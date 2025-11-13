@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.ragemusica.model.Region;
 import com.example.ragemusica.repository.RegionRepositorio;
 
+
+@SuppressWarnings("null")
 @Service
 public class RegionService {
 
@@ -23,6 +25,7 @@ public class RegionService {
         return region;
     }
 
+    
      public Region save(Region region) {
         return regionRepository.save(region);
     }
@@ -37,6 +40,8 @@ public class RegionService {
         }
         return null;
     }
+
+
 
     public void deleteById(Integer id) {
         regionRepository.deleteById(id);

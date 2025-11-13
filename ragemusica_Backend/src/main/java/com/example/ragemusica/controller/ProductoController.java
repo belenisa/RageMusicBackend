@@ -2,8 +2,10 @@ package com.example.ragemusica.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import com.example.ragemusica.service.ProductoService;
 @CrossOrigin(origins = "*")
 public class ProductoController {
 
+    @Autowired
     private final ProductoService service;
 
     public ProductoController(ProductoService service) {
@@ -44,5 +47,17 @@ public class ProductoController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(updatedProducto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUsuario(@PathVariable Integer id) {
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();  
+    }   
+
+
+    @GetMapping("/health")
+    public ResponseEntity<String> health() {
+        return ResponseEntity.ok("OK");
     }
 }

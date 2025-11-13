@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.example.ragemusica.model.Direcciones;
 import com.example.ragemusica.repository.DireccionesRepositorio;
 
+import lombok.NonNull;
+
+@SuppressWarnings("null")
+@NonNull
 @Service
 public class DireccionesService {
 

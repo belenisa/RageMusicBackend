@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ragemusica.model.SubGenero;
-import com.example.ragemusica.model.Usuario;
 import com.example.ragemusica.repository.SubGeneroRepository;
 
+
+@SuppressWarnings("null")
 @Service
 public class SubGeneroService {
 
@@ -28,6 +29,7 @@ public class SubGeneroService {
         return repo.save(subGenero);
     }
     
+
     public SubGenero partialUpdate(SubGenero subGenero){
         SubGenero existingSubGenero = repo.findById(subGenero.getId()).orElse(null);
         if (existingSubGenero != null) {
