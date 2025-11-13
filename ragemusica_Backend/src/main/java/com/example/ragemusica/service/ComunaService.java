@@ -11,7 +11,7 @@ import com.example.ragemusica.repository.ComunaRepositorio;
 @Service
 public class ComunaService {
 
-     @Autowired
+    @Autowired
     private ComunaRepositorio comunaRepository;
 
     public List<Comuna> findAll() {

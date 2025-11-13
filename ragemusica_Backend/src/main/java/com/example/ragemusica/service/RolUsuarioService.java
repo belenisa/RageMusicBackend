@@ -15,7 +15,8 @@ import jakarta.transaction.Transactional;
 @SuppressWarnings("null")
 @Transactional
 public class RolUsuarioService {
-     @Autowired
+    
+    @Autowired
     private RolUsuarioRepositorio rolRepository;
 
     public List<RolUsuarios> findAll() {
@@ -30,5 +31,9 @@ public class RolUsuarioService {
     @SuppressWarnings("null")
     public RolUsuarios save(RolUsuarios rol) {
         return rolRepository.save(rol);
-    } 
+    }
+
+    public void deleteById(Integer id) {
+        rolRepository.deleteById(id);
+    }
 }
