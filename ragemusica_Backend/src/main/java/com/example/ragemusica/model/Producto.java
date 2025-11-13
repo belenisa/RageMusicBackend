@@ -21,7 +21,10 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = true)
     private String descripcion;
 
     @Column(nullable = false)
@@ -36,5 +39,5 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "artista_id")
-    private Artista artista;
+    private Artistas artista;
 }
