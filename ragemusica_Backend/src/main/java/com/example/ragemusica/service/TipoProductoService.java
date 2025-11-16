@@ -24,7 +24,9 @@ public class TipoProductoService {
         return repo.save(tipo);
     }
 
-    public void deleteById(Integer id) {
-        repo.deleteById(id);
+    
+    public void eliminar(Integer id) {
+            repo.deleteById(id);
     }
+    
 }

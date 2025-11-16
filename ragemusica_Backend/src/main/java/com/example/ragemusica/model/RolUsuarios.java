@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,8 +15,6 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.EnumType;
 
 @Data
 @AllArgsConstructor
@@ -47,8 +48,10 @@ public class RolUsuarios {
         }
     }
 
-    @Enumerated(EnumType.STRING)
-    @JsonProperty("rol")
-    private RolUsuarios rol;
     
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @JsonProperty("rol")
+    private Rol rol;
+
 }

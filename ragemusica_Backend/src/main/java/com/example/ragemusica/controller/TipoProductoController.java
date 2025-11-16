@@ -31,14 +31,17 @@ public class TipoProductoController {
         return service.listar();
     }
 
+    
     @PostMapping
-    public TipoProducto crear(@RequestBody TipoProducto tipo) {
-        return service.guardar(tipo);
+    public ResponseEntity<TipoProducto> crear(@RequestBody TipoProducto tipo) {
+        TipoProducto nuevo = service.guardar(tipo);
+        return ResponseEntity.status(201).body(nuevo);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTipoProducto(@PathVariable Integer id) {
-        service.deleteById(id);
+        service.eliminar(id);
         return ResponseEntity.noContent().build();  
     }  
 }

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.ragemusica.model.Artistas;
 
-public interface ArtistasRepositorio extends JpaRepository<Artistas, Long> {
+public interface ArtistasRepositorio extends JpaRepository<Artistas, Integer> {
 
 }

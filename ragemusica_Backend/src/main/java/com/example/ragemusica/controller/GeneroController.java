@@ -1,10 +1,19 @@
 package com.example.ragemusica.controller;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.ragemusica.model.Genero;
 import com.example.ragemusica.service.GeneroService;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/generos")
@@ -17,13 +26,29 @@ public class GeneroController {
         this.service = service;
     }
 
+    
     @GetMapping
-    public List<Genero> listar() {
-        return service.listar();
+    public ResponseEntity<List<Genero>> listar() {
+        List<Genero> generos = service.listar();
+        if (generos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(generos);
     }
 
+
+    
     @PostMapping
-    public Genero crear(@RequestBody Genero genero) {
-        return service.guardar(genero);
+    public ResponseEntity<Genero> crear(@RequestBody Genero genero) {
+        Genero nuevo = service.guardar(genero);
+        return ResponseEntity.status(201).body(nuevo);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteGenero(@PathVariable Integer id) {
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();  
+    }   
+
+
 }

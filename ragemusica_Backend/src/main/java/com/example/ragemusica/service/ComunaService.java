@@ -11,7 +11,7 @@ import com.example.ragemusica.repository.ComunaRepositorio;
 @Service
 public class ComunaService {
 
-     @Autowired
+    @Autowired
     private ComunaRepositorio comunaRepository;
 
     public List<Comuna> findAll() {
@@ -23,19 +23,23 @@ public class ComunaService {
         return comuna;
     }
 
-     public Comuna save(Comuna comuna) {
+    
+    public Comuna save(Comuna comuna) {
         return comunaRepository.save(comuna);
     }
 
-    public Comuna partialUpdate(Comuna comuna){
-        Comuna existingComuna = comunaRepository.findById(comuna.getId()).orElse(null);
-        if (existingComuna != null) {
-            if (comuna.getNombre() != null) {
-                existingComuna.setNombre(comuna.getNombre());
-            }
-            return comunaRepository.save(existingComuna);
-        }
-        return null;
+    public Comuna partialUpdate(Comuna comuna) {
+        return comunaRepository.findById(comuna.getId())
+                .map(existingComuna -> {
+                    if (comuna.getNombre() != null) {
+                        existingComuna.setNombre(comuna.getNombre());
+                    }
+                    if (comuna.getRegion() != null) {
+                        existingComuna.setRegion(comuna.getRegion());
+                    }
+                    return comunaRepository.save(existingComuna);
+                })
+                .orElse(null);
     }
 
     public void deleteById(Integer id) {

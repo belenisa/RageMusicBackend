@@ -22,4 +22,21 @@ public class GeneroService {
     public Genero guardar(Genero genero) {
         return repo.save(genero);
     }
+
+    
+    public Genero partialUpdate(Genero genero) {
+        return repo.findById(genero.getId())
+                .map(existingGenero -> {
+                    if (genero.getNombre() != null) {
+                        existingGenero.setNombre(genero.getNombre());
+                    }
+                    return repo.save(existingGenero);
+                })
+                .orElse(null);
+    }
+
+
+    public void deleteById(Integer id) {
+        repo.deleteById(id);
+    }
 }

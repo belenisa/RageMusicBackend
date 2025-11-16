@@ -2,45 +2,58 @@ package com.example.ragemusica.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ragemusica.model.Direcciones;
 import com.example.ragemusica.repository.DireccionesRepositorio;
 
+
+
 @Service
+@Transactional
 public class DireccionesService {
 
-    @Autowired
-    private DireccionesRepositorio direccionRepository;
+    private final DireccionesRepositorio direccionRepository;
+
+    public DireccionesService(DireccionesRepositorio direccionRepository) {
+        this.direccionRepository = direccionRepository;
+    }
 
     public List<Direcciones> findAll() {
         return direccionRepository.findAll();
     }
 
     public Direcciones findById(Integer id) {
-        Direcciones direcciones = direccionRepository.findById(id).orElse(null);
-        return direcciones;
+        return direccionRepository.findById(id).orElse(null);
     }
 
-     public Direcciones save(Direcciones direcciones) {
+    public Direcciones save(Direcciones direcciones) {
         return direccionRepository.save(direcciones);
     }
 
-    public Direcciones partialUpdate(Direcciones direcciones){
-        Direcciones existingDireciones = direccionRepository.findById(direcciones.getId()).orElse(null);
-        if (existingDireciones != null) {
-            if (direcciones.getDireccion() != null) {
-                existingDireciones.setDireccion(direcciones.getDireccion());
-            }
+    public Direcciones updateDirecciones(Direcciones direcciones) {
+        return save(direcciones);
+    }
 
-            if(direcciones.getCodigoPostal() != null) {
-                existingDireciones.setCodigoPostal(direcciones.getCodigoPostal());
-            }
-
-            return direccionRepository.save(existingDireciones);
-        }
-        return null;
+    public Direcciones partialUpdate(Direcciones direcciones) {
+        return direccionRepository.findById(direcciones.getId())
+                .map(existingDirecciones -> {
+                    if (direcciones.getDireccion() != null) {
+                        existingDirecciones.setDireccion(direcciones.getDireccion());
+                    }
+                    if (direcciones.getCodigoPostal() != null) {
+                        existingDirecciones.setCodigoPostal(direcciones.getCodigoPostal());
+                    }
+                    if (direcciones.getComuna() != null) {
+                        existingDirecciones.setComuna(direcciones.getComuna());
+                    }
+                    if (direcciones.getUsuario() != null) {
+                        existingDirecciones.setUsuario(direcciones.getUsuario());
+                    }
+                    return direccionRepository.save(existingDirecciones);
+                })
+                .orElse(null);
     }
 
     public void deleteById(Integer id) {

@@ -8,10 +8,10 @@ import jakarta.transaction.Transactional;
 
 import com.example.ragemusica.model.Usuario;
 import com.example.ragemusica.repository.UsuarioRepositorio;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Transactional
-@SuppressWarnings("null")
 @Service
 public class UsuarioService {
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,5 +41,11 @@ public class RolUsuariosController {
         RolUsuarios createdRol = rolService.save(rol);
         return ResponseEntity.status(201).body(createdRol);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRolUsuarios(@PathVariable Integer id) {
+        rolService.deleteById(id);
+        return ResponseEntity.noContent().build();  
+    }     
 
 }

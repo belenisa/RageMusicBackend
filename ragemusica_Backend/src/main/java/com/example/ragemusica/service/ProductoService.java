@@ -27,40 +27,38 @@ public class ProductoService {
         return repo.save(producto);
     }
 
-    public Producto partialUpdate(Producto producto){
-        Producto existingProducto = repo.findById(producto.getId()).orElse(null);
-        if (existingProducto != null) {
-                if (producto.getNombre() != null) {
-                    existingProducto.setNombre(producto.getNombre());
-                }
-                if (producto.getTipoProducto() != null) {
-                    existingProducto.setTipoProducto(producto.getTipoProducto());
-                }
-                if (producto.getArtista() != null) {
-                    existingProducto.setArtista(producto.getArtista());
-                }
-                if (producto.getDescripcion() != null) {
-                    existingProducto.setDescripcion(producto.getDescripcion());
-                }
-                if (producto.getPrecio() != null) {
-                    existingProducto.setPrecio(producto.getPrecio());
-                }
-                if (producto.getStock() != null) {
-                    existingProducto.setStock(producto.getStock());
-                }
-
-            return repo.save(existingProducto);
-        }
-        return null;
+    public Producto partialUpdate(Producto producto) {
+        return repo.findById(producto.getId())
+                .map(existingProducto -> {
+                    if (producto.getNombre() != null) {
+                        existingProducto.setNombre(producto.getNombre());
+                    }
+                    if (producto.getTipoProducto() != null) {
+                        existingProducto.setTipoProducto(producto.getTipoProducto());
+                    }
+                    if (producto.getArtista() != null) {
+                        existingProducto.setArtista(producto.getArtista());
+                    }
+                    if (producto.getDescripcion() != null) {
+                        existingProducto.setDescripcion(producto.getDescripcion());
+                    }
+                    if (producto.getPrecio() != null) {
+                        existingProducto.setPrecio(producto.getPrecio());
+                    }
+                    if (producto.getStock() != null) {
+                        existingProducto.setStock(producto.getStock());
+                    }
+                    return repo.save(existingProducto);
+                })
+                .orElse(null);
     }
 
-    public void deleteById(Integer id) {
+    public void eliminar(Integer id) {
         repo.deleteById(id);
     }
 
     public List<Producto> findByArtistaId(Integer artistaId) {
         return repo.findByArtistaId(artistaId);
     }
-
-
 }
+

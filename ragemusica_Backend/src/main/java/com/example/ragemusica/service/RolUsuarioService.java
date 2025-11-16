@@ -31,4 +31,8 @@ public class RolUsuarioService {
     public RolUsuarios save(RolUsuarios rol) {
         return rolRepository.save(rol);
     } 
+
+    public void deleteById(Integer id) {
+        rolRepository.deleteById(id);
+    }
 }
