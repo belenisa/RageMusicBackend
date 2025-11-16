@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 import com.example.ragemusica.model.Region;
 import com.example.ragemusica.repository.RegionRepositorio;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Service
+@SuppressWarnings("null")
 public class RegionService {
 
     @Autowired

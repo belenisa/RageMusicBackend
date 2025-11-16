@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 import com.example.ragemusica.model.TipoProducto;
 import com.example.ragemusica.repository.TipoProductoRepository;
 
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional
 @Service
+@SuppressWarnings("null")
 public class TipoProductoService {
 
     private final TipoProductoRepository repo;

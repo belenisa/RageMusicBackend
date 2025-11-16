@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.ragemusica.model.RolUsuarios;
 import com.example.ragemusica.repository.RolUsuarioRepositorio;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service

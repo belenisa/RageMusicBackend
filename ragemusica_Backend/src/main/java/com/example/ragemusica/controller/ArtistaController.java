@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ragemusica.model.Artista;
 import com.example.ragemusica.service.ArtistaService;
 
+
 @RestController
 @RequestMapping("/api/artistas")
 @CrossOrigin(origins = "*")
 public class ArtistaController {
 
-    
-@Autowired
+    @Autowired
     private ArtistaService artistaService;
 
     @GetMapping

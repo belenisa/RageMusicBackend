@@ -10,8 +10,9 @@ import com.example.ragemusica.repository.DireccionesRepositorio;
 
 
 
-@Service
 @Transactional
+@Service
+@SuppressWarnings("null")
 public class DireccionesService {
 
     private final DireccionesRepositorio direccionRepository;

@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ragemusica.model.Comuna;
 import com.example.ragemusica.repository.ComunaRepositorio;
 
+@Transactional
 @Service
+@SuppressWarnings("null")
 public class ComunaService {
 
     @Autowired

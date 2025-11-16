@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ragemusica.model.Usuario;
 import com.example.ragemusica.repository.UsuarioRepositorio;
@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Transactional
 @Service
+@SuppressWarnings("null")
 public class UsuarioService {
 
     @Autowired

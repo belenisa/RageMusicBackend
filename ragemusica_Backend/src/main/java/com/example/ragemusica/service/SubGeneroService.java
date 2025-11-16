@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 import com.example.ragemusica.model.SubGenero;
 import com.example.ragemusica.repository.SubGeneroRepository;
 
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional
 @Service
+@SuppressWarnings("null")
 public class SubGeneroService {
 
     private final SubGeneroRepository repo;

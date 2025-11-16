@@ -2,6 +2,7 @@ package com.example.ragemusica.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,16 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ragemusica.model.Genero;
 import com.example.ragemusica.service.GeneroService;
 
+
 @RestController
 @RequestMapping("/api/generos")
 @CrossOrigin(origins = "*")
 public class GeneroController {
 
-    private final GeneroService service;
-
-    public GeneroController(GeneroService service) {
-        this.service = service;
-    }
+    @Autowired
+    private GeneroService service;
 
     
     @GetMapping
@@ -36,8 +35,6 @@ public class GeneroController {
         return ResponseEntity.ok(generos);
     }
 
-
-    
     @PostMapping
     public ResponseEntity<Genero> crear(@RequestBody Genero genero) {
         Genero nuevo = service.guardar(genero);

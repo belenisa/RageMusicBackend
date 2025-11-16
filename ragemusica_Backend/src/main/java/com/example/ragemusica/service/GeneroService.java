@@ -2,11 +2,16 @@ package com.example.ragemusica.service;
 
 import com.example.ragemusica.model.Genero;
 import com.example.ragemusica.repository.GeneroRepository;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Transactional
 @Service
+@SuppressWarnings("null")
 public class GeneroService {
 
     private final GeneroRepository repo;
