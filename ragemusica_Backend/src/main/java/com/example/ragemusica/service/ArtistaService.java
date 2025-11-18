@@ -32,6 +32,10 @@ public class ArtistaService {
         return repo.save(artista);
     }
 
+    public Artista updateUsuario(Artista artista) {
+        return repo.save(artista);
+    }
+
     public void deleteById(Integer id) {
         repo.deleteById(id);
     }

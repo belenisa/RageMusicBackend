@@ -22,12 +22,10 @@ public class RolUsuarioService {
         return rolRepository.findAll();
     }
 
-    @SuppressWarnings("null")
     public RolUsuarios findById(Integer id) {
         return rolRepository.findById(id).orElse(null);
     }
 
-    @SuppressWarnings("null")
     public RolUsuarios save(RolUsuarios rol) {
         return rolRepository.save(rol);
     } 

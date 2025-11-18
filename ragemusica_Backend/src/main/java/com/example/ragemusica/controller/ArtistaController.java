@@ -20,7 +20,7 @@ import com.example.ragemusica.service.ArtistaService;
 
 
 @RestController
-@RequestMapping("/api/artistas")
+@RequestMapping("/api/artista")
 @CrossOrigin(origins = "*")
 public class ArtistaController {
 
