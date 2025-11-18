@@ -47,6 +47,11 @@ public class ProductoController {
         return ResponseEntity.ok(updatedProducto);
     }
 
+    @GetMapping("/health")
+    public ResponseEntity<String> health() {
+        return ResponseEntity.ok("OK");
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProducto(@PathVariable Integer id) {
         service.eliminar(id);
