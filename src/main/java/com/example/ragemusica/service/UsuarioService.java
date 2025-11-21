@@ -35,21 +35,44 @@ public class UsuarioService {
         return usuario;
     }
 
+    // --- MÉTODO LOGIN MODIFICADO PARA DETECTAR ERRORES ---
     public Usuario login(Usuario usuario) {
+        System.out.println("------------------------------------------------");
+        System.out.println("🔍 INTENTO DE LOGIN");
+        System.out.println("📩 Correo recibido del Frontend: '" + usuario.getCorreo() + "'");
+        System.out.println("🔑 Contraseña recibida: '" + usuario.getContrasena() + "'");
+
+        // 1. Buscar usuario por correo
         Usuario foundUsuario = usurep.findByCorreo(usuario.getCorreo());
- 
-        if (foundUsuario != null &&  passwordEncoder.matches(usuario.getContrasena(), foundUsuario.getContrasena())) {
-            return foundUsuario;
+
+        if (foundUsuario == null) {
+            System.out.println("ERROR: No se encontró ningún usuario con el correo: " + usuario.getCorreo());
+            System.out.println("Verifica si en la base de datos el correo tiene espacios extra o mayúsculas.");
+            return null;
         }
 
-        return null;
+        System.out.println("Usuario encontrado en BD: " + foundUsuario.getNombre());
+        System.out.println("Hash guardado en BD: " + foundUsuario.getContrasena());
+
+        // 2. Verificar contraseña
+        boolean coinciden = passwordEncoder.matches(usuario.getContrasena(), foundUsuario.getContrasena());
+
+        if (coinciden) {
+            System.out.println("¡CONTRASEÑA CORRECTA! Login exitoso.");
+            return foundUsuario;
+        } else {
+            System.out.println("ERROR: La contraseña no coincide con el hash.");
+            return null;
+        }
     }
+    // -------------------------------------------------------
 
     public Usuario updateUsuario(Usuario usuario) {
         return save(usuario);
     }
 
     public Usuario save(Usuario usuario) {
+        // Aseguramos que la contraseña se encripte al crear
         String passwordHasheada = passwordEncoder.encode(usuario.getContrasena());
         usuario.setContrasena(passwordHasheada);
         return usurep.save(usuario);
