@@ -25,7 +25,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nombreUsuario", length = 50, nullable = false)
+    @Column(name = "nombreUsuario", length = 50, nullable = false, unique = true)
     private String nombre;
 
     @Column(name = "correoUsuario", length = 50, nullable = false, unique = true)
@@ -43,4 +43,8 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "codigo_rol")
     private RolUsuarios rol;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_Venta")
+    private Venta venta;
 }

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ragemusica.model.Artista;
 import com.example.ragemusica.service.ArtistaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 
 @RestController
 @RequestMapping("/api/artista")
@@ -28,6 +30,7 @@ public class ArtistaController {
     private ArtistaService artistaService;
 
     @GetMapping
+    @Operation(summary = "Obtener lista de los Artistas", description = "Obtiene una lista de todos los artistas")
     public ResponseEntity<List<Artista>> getAllArtistas() {
         List<Artista> artistas = artistaService.listar();
         if (artistas.isEmpty()) {
