@@ -1,5 +1,6 @@
 package com.example.ragemusica.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -9,7 +10,6 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Entity;
 
 @Data
 @AllArgsConstructor
@@ -26,7 +26,7 @@ public class Artistas {
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
-    @ManyToOne
-    @JoinColumn(name = "artista_id")
+    @ManyToOne//Declara una relación muchos-a-uno entre esta entidad
+    @JoinColumn(name = "artista_id") //columna de clave foránea
     private Artista artista;
 }

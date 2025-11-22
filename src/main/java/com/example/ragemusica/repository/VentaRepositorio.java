@@ -9,6 +9,8 @@ import com.example.ragemusica.model.Venta;
 @Repository
 public interface VentaRepositorio extends JpaRepository<Venta, Integer> {
 
-    @Query("SELECT SUM(d.precioTotal) FROM Venta d")
+    @Query("SELECT SUM(d.precioTotal) FROM Venta d") //consulta personalizada en JPQL (Java Persistence Query Language).
     Double calcularTotalGlobal();
 }
+
+// obtiene la suma de la columna precioTotal de todas las entidades Venta.

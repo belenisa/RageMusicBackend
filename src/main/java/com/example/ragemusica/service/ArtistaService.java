@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.ragemusica.model.Artista;
 import com.example.ragemusica.repository.ArtistaRepository;
 
-@Transactional
-@Service
-@SuppressWarnings("null")
+@Transactional //Indica que los métodos del servicio se ejecutan dentro de una transacción de base de datos.
+@Service //permite que Spring la detecte y la inyecte donde se necesite
+@SuppressWarnings("null") //compilador que ignore advertencias específicas (en este caso, relacionadas con posibles valores null).
 public class ArtistaService {
 
     private final ArtistaRepository repo;

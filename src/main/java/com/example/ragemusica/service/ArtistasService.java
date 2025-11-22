@@ -14,7 +14,7 @@ import com.example.ragemusica.repository.ArtistasRepositorio;
 @SuppressWarnings("null")
 public class ArtistasService {
 
-    @Autowired
+    @Autowired //inyectar automáticamente una instancia del bean correspondiente en este campo.
     private ArtistasRepositorio artistasRepository;
 
     public List<Artistas> findAll() {

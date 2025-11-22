@@ -65,7 +65,7 @@ public class DireccionController {
         return ResponseEntity.ok(updatedDireccion);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}")//actualizaciones parciales del recurso
     public ResponseEntity<Direcciones> updateParcialDireccion(@PathVariable Integer id, @RequestBody Direcciones direccion) {
         direccion.setId(id);
         Direcciones updatedDireccion = dircService.partialUpdate(direccion);

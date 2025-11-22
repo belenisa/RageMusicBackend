@@ -15,7 +15,7 @@ import com.example.ragemusica.repository.VentaRepositorio;
 @SuppressWarnings("null")
 public class VentaService {
 
-    @Autowired
+    @Autowired //inyectar automáticamente una instancia del bean correspondiente en este campo.
     private  VentaRepositorio repo;
 
     public List<Venta> getVenta() {

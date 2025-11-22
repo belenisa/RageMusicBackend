@@ -32,7 +32,7 @@ public class EstadoVenta {
         Cancelado, Entregado, Pendiente;
         
 
-        @JsonCreator
+        @JsonCreator //Indica a Jackson cómo construir una instancia del tipo
         public static Estado fromString(String value) {
             if (value == null) return null;
             for (Estado estado : Estado.values()) {
@@ -43,15 +43,15 @@ public class EstadoVenta {
             return null; // Evita que Spring falle antes de validar
         }
 
-        @JsonValue
+        @JsonValue //Define cómo se serializa el enum hacia JSON
         public String toJson() {
             return name();
         }
     }
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    @JsonProperty("estado")
+    @Enumerated(EnumType.STRING) // Guarda el nombre del enum (p. ej., "Pendiente") en la columna.
+    @Column(nullable = false) //Configura atributos de la columna en la BD.
+    @JsonProperty("estado") //Define el nombre de la propiedad en el JSON para el campo estado
     private Estado estado;
 
 }

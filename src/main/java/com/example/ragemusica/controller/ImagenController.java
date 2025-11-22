@@ -36,7 +36,7 @@ public class ImagenController {
         return imagenService.save(imagen);
     }
 
-    @PatchMapping("/{id}") // actualizar por id
+    @PatchMapping("/{id}") // actualizar por id, actualizaciones parciales del recurso
     public ResponseEntity<Imagenes> updateParcialUsuario(@PathVariable Integer id, @RequestBody Imagenes imagen) {
         imagen.setId(id);
         Imagenes updatedImagenes = imagenService.partialUpdate(imagen);
