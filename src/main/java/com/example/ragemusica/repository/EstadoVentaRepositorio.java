@@ -9,5 +9,5 @@ import com.example.ragemusica.model.EstadoVenta;
 
 @Repository //componente de acceso a datos
 public interface EstadoVentaRepositorio extends JpaRepository<EstadoVenta, Integer>{
-    Optional<EstadoVenta> findByCodigo(String codigo);
+    Optional<EstadoVenta> findByEstado(EstadoVenta.Estado estado);
 }
