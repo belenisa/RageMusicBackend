@@ -45,4 +45,8 @@ public class Venta {
     @ManyToOne
     @JoinColumn(name = "id_envio", nullable = false)
     private MetodoEnvio envio;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 }
