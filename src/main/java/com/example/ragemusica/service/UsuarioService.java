@@ -3,13 +3,12 @@ package com.example.ragemusica.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ragemusica.model.Usuario;
 import com.example.ragemusica.repository.UsuarioRepositorio;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Transactional
 @Service
@@ -38,9 +37,9 @@ public class UsuarioService {
     // --- MÉTODO LOGIN MODIFICADO PARA DETECTAR ERRORES ---
     public Usuario login(Usuario usuario) {
         System.out.println("------------------------------------------------");
-        System.out.println("🔍 INTENTO DE LOGIN");
-        System.out.println("📩 Correo recibido del Frontend: '" + usuario.getCorreo() + "'");
-        System.out.println("🔑 Contraseña recibida: '" + usuario.getContrasena() + "'");
+        System.out.println(" INTENTO DE LOGIN");
+        System.out.println(" Correo recibido del Frontend: '" + usuario.getCorreo() + "'");
+        System.out.println(" Contraseña recibida: '" + usuario.getContrasena() + "'");
 
         // 1. Buscar usuario por correo
         Usuario foundUsuario = usurep.findByCorreo(usuario.getCorreo());

@@ -19,11 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ragemusica.model.Direcciones;
 import com.example.ragemusica.service.DireccionesService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 
 @RestController
 @RequestMapping("/api/direccion")
 @CrossOrigin(origins = "*")
+@Tag(name = "Direccion", description = "Operaciones relacionadas con las Direcciones") //Permite agrupar los endpoints bajo un nombre y descripción 
 public class DireccionController {
 
     

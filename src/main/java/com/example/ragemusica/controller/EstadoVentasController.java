@@ -17,10 +17,12 @@ import com.example.ragemusica.model.EstadoVenta;
 import com.example.ragemusica.service.EstadoVentasService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController 
 @RequestMapping("/api/estado_ventas")
-@CrossOrigin(origins = "*") 
+@CrossOrigin(origins = "*")
+@Tag(name = "Estado de Venta", description = "Operaciones relacionadas con los Estados de Venta") //Permite agrupar los endpoints bajo un nombre y descripción  
 public class EstadoVentasController {
 
     @Autowired

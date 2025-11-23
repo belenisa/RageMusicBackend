@@ -44,4 +44,6 @@ public class Usuario {
     @JoinColumn(name = "codigo_rol")
     private RolUsuarios rol;
 
+    
+
 }

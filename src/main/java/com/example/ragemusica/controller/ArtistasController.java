@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ragemusica.model.Artistas;
 import com.example.ragemusica.service.ArtistasService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/artistas")
 @CrossOrigin(origins = "*")
+@Tag(name = "Artistas", description = "Operaciones relacionadas con los Artistas") //Permite agrupar los endpoints bajo un nombre y descripción 
 public class ArtistasController {
 
     @Autowired

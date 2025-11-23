@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ragemusica.model.Comuna;
 import com.example.ragemusica.service.ComunaService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/comuna")
 @CrossOrigin(origins = "*")
+@Tag(name = "Comuna", description = "Operaciones relacionadas con las Comuna") //Permite agrupar los endpoints bajo un nombre y descripción 
 public class ComunaController {
 
     
