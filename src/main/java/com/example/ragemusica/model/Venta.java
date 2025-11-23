@@ -23,6 +23,7 @@ public class Venta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "cantidad", nullable = false)
     private int cantidad;
 
     @Column(name = "precio_total", nullable = false)
