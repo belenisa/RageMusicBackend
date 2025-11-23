@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,6 @@ import com.example.ragemusica.model.Venta;
 import com.example.ragemusica.service.VentaService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -34,11 +34,17 @@ public class VentaController {
         return ventaService.getVenta();
     }
 
+    
+    
+    
     @PostMapping
     @Operation(summary = "Agregar una Venta", description = "Agregar una Venta")
-    public Venta agregarVenta(@RequestBody Venta venta) {
-        return ventaService.saveVenta(venta);
+    public ResponseEntity<Venta> agregarVenta(@RequestBody Venta venta) {
+        Venta guardada = ventaService.saveVenta(venta);
+        return ResponseEntity.status(HttpStatus.CREATED).body(guardada);
     }
+
+
 
     @GetMapping("/{id}")
     @Operation(summary = "Buscar una Venta", description = "Buscar una venta por ID")

@@ -52,7 +52,7 @@ public class ArtistaController {
     }
 
     @PostMapping //Mapea a HTTP POST, usado para crear recursos.
-    public ResponseEntity<Artista> createArtista(@RequestBody Artista artista)// //Indica que el parámetro del método se debe deserializar desde el cuerpo de la solicitud
+    public ResponseEntity<Artista> createArtista(@RequestBody Artista artista)//Indica que el parámetro del método se debe deserializar desde el cuerpo de la solicitud
      {
         artista.setId(null);
         Artista nuevaArtista = artistaService.guardar(artista);
