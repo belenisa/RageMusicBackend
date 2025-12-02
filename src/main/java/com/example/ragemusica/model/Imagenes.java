@@ -22,7 +22,7 @@ public class Imagenes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nombreimagne", length = 30, nullable = false)
+    @Column(name = "nombreimagne", length = 300, nullable = false)
     private String nombre;
 
     @ManyToOne
