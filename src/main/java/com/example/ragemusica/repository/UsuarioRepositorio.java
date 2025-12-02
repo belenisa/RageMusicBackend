@@ -8,4 +8,5 @@ import com.example.ragemusica.model.Usuario;
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
     Usuario findByCorreo(String correo);
+    Usuario findByNombre(String nombre);
 }

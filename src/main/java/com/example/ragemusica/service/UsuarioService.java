@@ -35,25 +35,25 @@ public class UsuarioService {
     }
 
     // --- MÉTODO LOGIN MODIFICADO PARA DETECTAR ERRORES ---
+    
     public Usuario login(Usuario usuario) {
         System.out.println("------------------------------------------------");
         System.out.println(" INTENTO DE LOGIN");
-        System.out.println(" Correo recibido del Frontend: '" + usuario.getCorreo() + "'");
+        System.out.println(" Nombre recibido del Frontend: '" + usuario.getNombre() + "'");
         System.out.println(" Contraseña recibida: '" + usuario.getContrasena() + "'");
 
-        // 1. Buscar usuario por correo
-        Usuario foundUsuario = usurep.findByCorreo(usuario.getCorreo());
+        // Buscar usuario por nombre
+        Usuario foundUsuario = usurep.findByNombre(usuario.getNombre());
 
         if (foundUsuario == null) {
-            System.out.println("ERROR: No se encontró ningún usuario con el correo: " + usuario.getCorreo());
-            System.out.println("Verifica si en la base de datos el correo tiene espacios extra o mayúsculas.");
+            System.out.println("ERROR: No se encontró ningún usuario con el nombre: " + usuario.getNombre());
             return null;
         }
 
         System.out.println("Usuario encontrado en BD: " + foundUsuario.getNombre());
         System.out.println("Hash guardado en BD: " + foundUsuario.getContrasena());
 
-        // 2. Verificar contraseña
+        // Verificar contraseña encriptada
         boolean coinciden = passwordEncoder.matches(usuario.getContrasena(), foundUsuario.getContrasena());
 
         if (coinciden) {
@@ -64,6 +64,7 @@ public class UsuarioService {
             return null;
         }
     }
+
     // -------------------------------------------------------
 
     public Usuario updateUsuario(Usuario usuario) {
