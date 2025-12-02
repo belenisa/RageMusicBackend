@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ragemusica.model.RolUsuarios;
 import com.example.ragemusica.model.Usuario;
+import com.example.ragemusica.repository.RolUsuarioRepositorio;
 import com.example.ragemusica.service.UsuarioService;
 
 @RestController
@@ -25,6 +27,11 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    
+    @Autowired
+    private RolUsuarioRepositorio rolRepository;
+
+
     @GetMapping
     public ResponseEntity<List<Usuario>> getallUsuario() {
         List<Usuario> usuarios = usuarioService.findAll();
@@ -33,6 +40,7 @@ public class UsuarioController {
         }
         return ResponseEntity.ok(usuarios);
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Usuario usuario) {
@@ -55,12 +63,19 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+      
     @PostMapping
-    public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
-        usuario.setId(null);
-        Usuario usuarioNew = usuarioService.save(usuario);
-        return ResponseEntity.status(201).body(usuarioNew);
-    }
+        public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
+            if (usuario.getRol() != null && usuario.getRol().getRol() != null) {
+                RolUsuarios rol = rolRepository.findByRol(usuario.getRol().getRol())
+                    .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+                usuario.setRol(rol);
+            }
+            usuario.setId(null);
+            Usuario usuarioNew = usuarioService.save(usuario);
+            return ResponseEntity.status(201).body(usuarioNew);
+        }
+    
 
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
