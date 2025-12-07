@@ -1,9 +1,8 @@
+
 package com.example.ragemusica.controller;
 
 import java.util.List;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,38 +17,59 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ragemusica.model.Imagenes;
 import com.example.ragemusica.service.ImagenService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api/imagen")
 @CrossOrigin(origins = "*")
+@Tag(name = "Imagen", description = "Operaciones relacionadas con las imágenes")
+@RequiredArgsConstructor
 public class ImagenController {
 
-    @Autowired
-    private  ImagenService imagenService;
+    private final ImagenService imagenService;
 
+    @Operation(summary = "Listar todas las imágenes")
     @GetMapping
-    public List<Imagenes> listar() {
-        return imagenService.listar();
+    public ResponseEntity<List<Imagenes>> listar() {
+        List<Imagenes> lista = imagenService.listar();
+        return ResponseEntity.ok(lista);
     }
 
-    @PostMapping
-    public Imagenes crear(@RequestBody Imagenes imagen) {
-        return imagenService.save(imagen);
-    }
-
-    @PatchMapping("/{id}") // actualizar por id, actualizaciones parciales del recurso
-    public ResponseEntity<Imagenes> updateParcialUsuario(@PathVariable Integer id, @RequestBody Imagenes imagen) {
-        imagen.setId(id);
-        Imagenes updatedImagenes = imagenService.partialUpdate(imagen);
-        if (updatedImagenes == null) {
+    @Operation(summary = "Obtener una imagen por ID")
+    @GetMapping("/{id}")
+    public ResponseEntity<Imagenes> obtener(@PathVariable Integer id) {
+        Imagenes imagen = imagenService.findById(id);
+        if (imagen == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(updatedImagenes);
+        return ResponseEntity.ok(imagen);
     }
 
+    @Operation(summary = "Crear una imagen")
+    @PostMapping
+    public ResponseEntity<Imagenes> crear(@Valid @RequestBody Imagenes imagen) {
+        Imagenes creada = imagenService.save(imagen);
+        return ResponseEntity.ok(creada);
+    }
+
+    @Operation(summary = "Actualizar parcialmente una imagen por ID")
+    @PatchMapping("/{id}")
+    public ResponseEntity<Imagenes> updateParcial(@PathVariable Integer id, @Valid @RequestBody Imagenes imagen) {
+        imagen.setId(id);
+        Imagenes updated = imagenService.partialUpdate(imagen);
+        if (updated == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updated);
+    }
+
+    @Operation(summary = "Eliminar una imagen por ID")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteImagen(@PathVariable Integer id) {
         imagenService.deleteById(id);
-        return ResponseEntity.noContent().build();  
-    }    
-
+        return ResponseEntity.noContent().build();
+    }
 }
