@@ -17,13 +17,11 @@ public class ImagenService {
     @Autowired
     private ImagenRepositorio repo;
 
-
     @Transactional(readOnly = true)
     public List<Imagenes> listar() {
         return repo.findAll();
     }
 
-    
     @Transactional(readOnly = true)
     public Imagenes findById(int id) {
         return repo.findById(id).orElseThrow(
@@ -31,6 +29,7 @@ public class ImagenService {
         );
     }
 
+    @Transactional
     public Imagenes save(Imagenes imagen) {
         if (imagen.getUrl() == null ||
             !(imagen.getUrl().startsWith("http://") || imagen.getUrl().startsWith("https://"))) {
@@ -45,18 +44,17 @@ public class ImagenService {
         return repo.save(imagen);
     }
 
-   
     @Transactional
     public Imagenes partialUpdate(Imagenes imagen) {
         Integer idObj = imagen.getId();
         if (idObj == null) {
             throw new IllegalArgumentException("El ID es obligatorio para actualización parcial");
         }
-        final int id = idObj; // ahora el analizador ve un primitivo, no puede ser null
+        final int id = idObj;
 
         Imagenes existing = repo.findById(id).orElse(null);
         if (existing == null) {
-            return null; 
+            return null; // o lanzar EntityNotFoundException según tu contrato
         }
 
         if (imagen.getNombre() != null) {
@@ -74,15 +72,14 @@ public class ImagenService {
         }
 
         if (imagen.getProducto() != null) {
-        existing.setProducto(imagen.getProducto());
+            existing.setProducto(imagen.getProducto());
         }
 
         return repo.save(existing);
     }
-    
+
     @Transactional
     public void deleteById(int id) {
         repo.deleteById(id);
     }
-
 }
