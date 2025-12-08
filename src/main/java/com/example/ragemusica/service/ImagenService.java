@@ -23,9 +23,12 @@ public class ImagenService {
         return repo.findAll();
     }
 
+    
     @Transactional(readOnly = true)
-    public Imagenes findById(Integer id) {
-        return repo.findById(id).orElse(null);
+    public Imagenes findById(int id) {
+        return repo.findById(id).orElseThrow(
+            () -> new jakarta.persistence.EntityNotFoundException("Imagen no encontrada: id=" + id)
+        );
     }
 
     public Imagenes save(Imagenes imagen) {
@@ -42,32 +45,44 @@ public class ImagenService {
         return repo.save(imagen);
     }
 
+   
+    @Transactional
     public Imagenes partialUpdate(Imagenes imagen) {
-        if (imagen.getId() == null) {
+        Integer idObj = imagen.getId();
+        if (idObj == null) {
             throw new IllegalArgumentException("El ID es obligatorio para actualización parcial");
         }
-        Imagenes existing = repo.findById(imagen.getId()).orElse(null);
+        final int id = idObj; // ahora el analizador ve un primitivo, no puede ser null
+
+        Imagenes existing = repo.findById(id).orElse(null);
         if (existing == null) {
-            return null; // o lanza una excepción custom NotFound
+            return null; 
         }
 
         if (imagen.getNombre() != null) {
+            if (imagen.getNombre().isBlank()) {
+                throw new IllegalArgumentException("El nombre no puede estar vacío");
+            }
             existing.setNombre(imagen.getNombre());
         }
+
         if (imagen.getUrl() != null) {
             if (!(imagen.getUrl().startsWith("http://") || imagen.getUrl().startsWith("https://"))) {
                 throw new IllegalArgumentException("URL inválida: debe comenzar con http/https");
             }
             existing.setUrl(imagen.getUrl());
         }
+
         if (imagen.getProducto() != null) {
-            existing.setProducto(imagen.getProducto());
+        existing.setProducto(imagen.getProducto());
         }
 
         return repo.save(existing);
     }
-
-    public void deleteById(Integer id) {
-            repo.deleteById(id);
+    
+    @Transactional
+    public void deleteById(int id) {
+        repo.deleteById(id);
     }
+
 }
