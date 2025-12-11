@@ -1,4 +1,3 @@
-
 package com.example.ragemusica.controller;
 
 import java.util.List;
@@ -43,10 +42,24 @@ public class ImagenController {
     @GetMapping("/{id}")
     public ResponseEntity<Imagenes> obtener(@PathVariable int id) {
         try {
-            Imagenes imagen = imagenService.findById(id); // lanza EntityNotFoundException si no existe
+            Imagenes imagen = imagenService.findById(id); 
             return ResponseEntity.ok(imagen);
         } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @Operation(summary = "Obtener la imagen principal por ID de Producto")
+    @GetMapping("/producto/{productoId}") // <--- ESTA RUTA COINCIDE CON TU RETROFIT
+    public ResponseEntity<Imagenes> obtenerImagenPorProductoId(@PathVariable int productoId) {
+        // Usamos la función optimizada del Servicio
+        Imagenes imagen = imagenService.findByProductoId(productoId);
+        
+        if (imagen != null) {
+            return ResponseEntity.ok(imagen); // Devuelve 200 OK con la imagen
+        } else {
+            // Devuelve 404 NOT FOUND si el producto no tiene una imagen asociada
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
         }
     }
 
@@ -54,7 +67,6 @@ public class ImagenController {
     @PostMapping
     public ResponseEntity<Imagenes> crear(@RequestBody Imagenes imagen) {
         Imagenes creada = imagenService.save(imagen);
-        // Puedes devolver 201 Created si lo prefieres
         return ResponseEntity.status(HttpStatus.CREATED).body(creada);
     }
 

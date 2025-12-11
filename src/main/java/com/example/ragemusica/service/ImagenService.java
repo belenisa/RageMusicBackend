@@ -1,15 +1,24 @@
-
 package com.example.ragemusica.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Transactional; // Comentario: Importante para la gestión de transacciones
 
 import com.example.ragemusica.model.Imagenes;
 import com.example.ragemusica.repository.ImagenRepositorio;
 
+/**
+ * Servicio para la gestión de la entidad Imagenes.
+ * * @Transactional: Indica que todos los métodos públicos de esta clase serán gestionados
+ * dentro de una transacción de base de datos.
+ * - Si un método falla (lanza una excepción no comprobada), la transacción se revierte (rollback).
+ * - Si un método termina con éxito, los cambios se confirman (commit).
+ * * @Transactional(readOnly = true): Optimización para consultas de solo lectura. 
+ * Le indica a la base de datos que no necesita bloquear recursos ni realizar seguimiento de cambios, 
+ * mejorando el rendimiento para las operaciones de lectura (ej: listar y findById).
+ */
 @Service
 @Transactional
 public class ImagenService {
@@ -28,6 +37,11 @@ public class ImagenService {
             () -> new jakarta.persistence.EntityNotFoundException("Imagen no encontrada: id=" + id)
         );
     }
+   
+    @Transactional(readOnly = true)
+    public Imagenes findByProductoId(int productoId) {
+        return repo.findByProductoId(productoId).orElse(null);
+    }
 
     @Transactional
     public Imagenes save(Imagenes imagen) {
@@ -38,8 +52,8 @@ public class ImagenService {
         if (imagen.getNombre() == null || imagen.getNombre().isBlank()) {
             throw new IllegalArgumentException("El nombre es obligatorio");
         }
-        if (imagen.getProducto() == null) {
-            throw new IllegalArgumentException("El producto es obligatorio");
+        if (imagen.getProducto() == null || imagen.getProducto().getId() == null) {
+             throw new IllegalArgumentException("El producto es obligatorio");
         }
         return repo.save(imagen);
     }
@@ -54,7 +68,7 @@ public class ImagenService {
 
         Imagenes existing = repo.findById(id).orElse(null);
         if (existing == null) {
-            return null; // o lanzar EntityNotFoundException según tu contrato
+            return null;
         }
 
         if (imagen.getNombre() != null) {
